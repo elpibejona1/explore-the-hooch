@@ -1,0 +1,7 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <title>hamburger</title>
+  <rect width="32" height="32" style="fill: #4a0a00"/>
+  <path d="M4,10H28a2,2,0,0,0,0-4H4A2,2,0,0,0,4,10Z" style="fill: #fff"/>
+  <path d="M28,14H4a2,2,0,0,0,0,4H28A2,2,0,0,0,28,14Z" style="fill: #fff"/>
+  <path d="M28,22H4a2,2,0,0,0,0,4H28A2,2,0,0,0,28,22Z" style="fill: #fff"/>
+</svg>

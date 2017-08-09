@@ -1,0 +1,909 @@
+@import '_reset.less';
+@import '_grid.less';
+@import '_mixins.less';
+@import 'http://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css';
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css?family=Hind:400,300,500,600,700);
+
+// Global Mixin Calls (Margin, Padding, etc)
+
+.generateMargin(20,bottom); // margin-bottom-(num)
+.generateMargin(20,top);    // margin-top-(num)
+.generateMargin(20,left);   // margin-left-(num)
+.generateMargin(20,right);  // margin-right-(num)
+
+.generatePadding(20,bottom); // padding-bottom-(num)
+.generatePadding(20,top);    // padding-top-(num)
+.generatePadding(20,left);   // padding-left-(num)
+.generatePadding(20,right);  // padding-right-(num)
+
+
+// Color Declaration
+
+@black: #000;
+@white: #fff;
+
+@green: #3cc47c;
+@dGreen: #1e392a;
+@tan: #e9c893;
+@gray: #828082;
+
+//Font Family Declarations
+
+.montserratNormal { font-family: 'Montserrat', sans-serif; font-weight: 400; font-style: normal; }
+.montserratBold { font-family: 'Montserrat', sans-serif; font-weight: 700; font-style: normal; }
+
+
+.hindLight { font-family: 'Hind', sans-serif; font-weight: 300; }
+.hindNormal { font-family: 'Hind', sans-serif; font-weight: 400; }
+.hindMedium { font-family: 'Hind', sans-serif; font-weight: 500; }
+.hindSemiBold { font-family: 'Hind', sans-serif; font-weight: 600; }
+.hindBold { font-family: 'Hind', sans-serif; font-weight: 700; }
+
+//Font Size/Weight Declarations
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+	.hindNormal;
+	font-size: 14px;
+	line-height: 1.2;
+	font-weight: 400;
+}
+
+p + p { margin-top: 20px; }
+
+sup,
+sub { font-size: 50%; line-height: 0; }
+
+ul { list-style-type: none; }
+
+h2 + p { margin-top: 20px; }
+
+p + h2 { margin-top: 20px; }
+
+.list { list-style-position: outside; margin-left: 26px; }
+
+ul.list { list-style-type: disc; }
+
+a { text-decoration: none; color: @white; }
+
+strong { font-weight: 600; }
+
+em { font-style: italic; }
+
+.heading {
+	.montserratNormal;
+	font-size: 18px;
+	color: @white;
+	padding: 10px;
+	background-color: @gray;
+	text-align: center;
+
+	&--padding { padding-top: 75px; }
+}
+
+.subHeading {
+	.montserratBold;
+	font-size: 25px;
+	color: @dGreen;
+	margin-top: 10px;
+	margin-bottom: 10px;
+
+	span { .montserratNormal; font-size: 20px; color: @gray; }
+}
+
+
+// Generic Reusable Styles
+
+.floatLeft {
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+
+	&.push { margin-left: -80px; }
+}
+
+.floatRight {
+	float: right;
+	margin-right: 10px;
+	margin-bottom: 10px;
+
+	&.push { margin-right: -80px; }
+
+	+ p { margin-top: 20px; }
+}
+
+.clear { clear: both; }
+
+
+//Generic Global Styles
+
+body {
+	font-size: 14px;
+	line-height: 1.2;
+	font-weight: 400;
+	color: @black;
+}
+
+html { position: relative; min-height: 100vh; }
+
+
+// Header + Navigation
+
+.closeEverything {
+	display: none;
+	width: 100%;
+	height: 100vh;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2999;
+	&.active { display: block; }
+}
+
+.header__topBar {
+	color: @white;
+	background-color: @green;
+	text-align: center;
+	position: fixed;
+	width: 100%;
+	z-index: 3000;
+	height: 68px;
+	top: 0;
+
+	a {
+		margin: 10px;
+		display: block;
+		text-align: center;
+		padding-left: 25px;
+
+		p {
+			.montserratNormal;
+			font-size: 18px;
+		}
+
+		span { .montserratBold; font-size: 25px; }
+
+		img { display: inline; width: 25px; height: 25px; }
+
+		.tagline {
+			font-size: 10px;
+			.hindNormal;
+			font-style: italic;
+			display: block;
+			margin-top: 5px;
+			text-align: center;
+		}
+	}
+}
+
+.header__buttons {
+	position: absolute; 
+	left: 0;
+	height: 68px;
+	width: 48px;
+
+	.header__hamburger {
+		height: 68px;
+		width: 48px;
+		padding: 15px 8px;
+		cursor: pointer;
+	}
+	
+	.hamburger__top { transition: 0.5s; transform-origin: 2px 8px; }
+
+	.hamburger__middle { transition: 0.5s; }
+
+	.hamburger__bottom { transition: 0.5s; transform-origin: 2px 24px; }
+
+
+	&.active {
+		background-color: @dGreen;
+
+		.hamburger__top { transform: rotate(45deg) translate(1.5px, -3.75px); }
+
+		.hamburger__middle { opacity: 0; visibility: hidden; }
+
+		.hamburger__bottom { transform: rotate(-45deg) translate(1.5px, 3.75px); }
+	}
+}
+
+.header__dropdown {
+	background-color: @dGreen;
+	position: fixed;
+	top: 67px;
+	display: none;
+	z-index: 3000;
+
+	&__links {
+		height: 50px;
+		border-top: 1px solid @white;
+
+		&.active a { color: @tan; }
+
+		a {
+			display: block;
+			.montserratNormal;
+			color: @white;
+			font-size: 20px;
+			height: 100%;
+			width: 100%;
+			padding: 10px 50px 10px 20px;
+			vertical-align: middle;
+
+			br { display: none; }
+		}
+	}
+}
+
+.nav {
+	width: 100%;
+	background-color: @dGreen;
+	position: fixed;
+	bottom: 0;
+	padding: 10px;
+	z-index: 1;
+
+	li { float: left; text-align: center; }
+
+	a {
+		color: @white;
+
+		i { font-size: 30px !important; margin-bottom: 5px;}
+		
+		span { .hindSemiBold; font-size: 14px; }
+
+		&.active { color: @tan; }
+	}
+
+	&--main {
+		li {  width: 20%; }
+	}
+	
+	&--noMap {
+		li {  width: 25%; }
+	}
+
+}
+
+// Footer
+
+.footerMobile { display: none; }
+
+footer {
+	padding: 10px;
+	background-color: @black;
+	color: @white;
+	text-align: center;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+
+	a { color: @tan; }
+
+	p + p { margin-top: 10px; }
+}
+
+.container--footer { background-color: transparent !important; padding: 0; }
+
+.copyright { font-size: 12px; }
+
+.attributions { font-size: 8px; margin-top: 10px; }
+
+
+// Homepage Styles
+.container--home { 
+	padding: 0;
+	
+	.row:first-child { padding-top: 0 !important; }
+}
+
+.heading--home { margin-top: 68px; }
+
+.home__city {
+	display: block;
+	background-color: @dGreen;
+	color: @tan;
+	.montserratNormal;
+	padding-left: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+
+}
+
+.home__unit {
+	height: 100px;
+	text-align: center;
+	overflow: hidden;
+	border-bottom: 2px solid @gray;
+
+	&--1 { background-image: url('../_images/palisades-east/image1.jpg'); background-size: cover; background-repeat: no-repeat;}
+	&--2 { background-image: url('../_images/palisades-east/image2.jpg'); background-size: cover; background-repeat: no-repeat;}
+	&--3 { background-image: url('../_images/palisades-east/image3.jpg'); background-size: cover; background-repeat: no-repeat;}
+	&--4 { background-image: url('../_images/palisades-east/image1.jpg'); background-size: cover; background-repeat: no-repeat;}
+	&--5 { background-image: url('../_images/palisades-east/image2.jpg'); background-size: cover; background-repeat: no-repeat;}
+	&--6 { background-image: url('../_images/palisades-east/image3.jpg'); background-size: cover; background-repeat: no-repeat;}
+	&--7 { background-image: url('../_images/palisades-east/image1.jpg'); background-size: cover; background-repeat: no-repeat;}
+	&--8 { background-image: url('../_images/palisades-east/image2.jpg'); background-size: cover; background-repeat: no-repeat;}
+	&--9 { background-image: url('../_images/palisades-east/image3.jpg'); background-size: cover; background-repeat: no-repeat;}
+	&--10 { background-image: url('../_images/palisades-east/image1.jpg'); background-size: cover; background-repeat: no-repeat;}
+	&--11 { background-image: url('../_images/palisades-east/image2.jpg'); background-size: cover; background-repeat: no-repeat;}
+	&--12 { background-image: url('../_images/palisades-east/image3.jpg'); background-size: cover; background-repeat: no-repeat;}
+	&--13 { background-image: url('../_images/palisades-east/image1.jpg'); background-size: cover; background-repeat: no-repeat;}
+	&--14 { background-image: url('../_images/palisades-east/image2.jpg'); background-size: cover; background-repeat: no-repeat;}
+	&--15 { background-image: url('../_images/palisades-east/image3.jpg'); background-size: cover; background-repeat: no-repeat;}
+	&--16 { background-image: url('../_images/palisades-east/image2.jpg'); background-size: cover; background-repeat: no-repeat;}
+
+	a {
+		display: block;
+		width: 100%;
+		height: 100%;
+		color: @white;
+		text-shadow: 0 0 7px @black;
+	}
+
+	h3 {
+		.hindBold;
+		font-size: 20px;
+		padding-top:10px;
+	}
+
+	.amenities--home img { height: 30px; margin: 0 3px; }
+
+}
+// Interior Page Styles
+.container { 
+	.row:first-child { padding-top: 20px; }
+
+	.row--directions:first-child { padding-top: 40px; }
+}
+
+.content {
+
+	&__hero {
+		width: 100%;
+		height: 128px;
+		overflow: hidden;
+		margin-top: 68px;
+
+		img { width: 100%;}
+	}
+	
+	&--last { margin-bottom: 92px; }
+
+	&--lastIndex { margin-bottom: 80px; }
+
+	p { color: @gray; font-size: 16px; }
+
+	a { color: @green; text-decoration: underline; }
+
+	.footnote {
+		margin-top: 50px;
+		margin-bottom: 30px;
+		font-size: 12px;
+		font-style: italic;
+	}
+
+	&:after {
+		content: "";
+		display: table;
+		clear: both; 
+	}
+}
+
+// Info Sections
+.fullContainer--hero { padding: 0; }
+
+.unitDescription { .hindNormal; font-size: 18px; color: @gray; }
+
+.amenities {
+	width: 100%;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+
+	img { height: 35px; display: inline-block; margin: 5px; }
+}
+
+// Directions Sections
+
+.fullContainer--directions { margin-top: 68px; }
+
+.entrances {
+	width: 100%;
+	border-bottom: 1px solid @gray;
+	padding-top: 10px;
+	padding-bottom: 10px;
+
+	&--first { border-top: 1px solid @gray; margin-top: 20px; }
+
+	&:after {
+		content: "";
+		display: table;
+		clear: both; 
+	}
+
+	a { 
+		display: block;
+		height: 100%;
+		width: 100%;
+		text-decoration: none !important;
+	}
+
+	img { display: inline-block; width: 30%; vertical-align: middle; }
+
+	h2 {
+		display: inline-block;
+		.montserratNormal;
+		font-size: 20px;
+		color: @gray;
+		width: 70%;
+		padding-left: 20px;
+		vertical-align: middle;
+		text-align: center;
+	}
+}
+
+// Photos Sections
+
+.heading--photos { margin-top: 68px; }
+
+.slidesWrap {
+	width: 100%;
+	overflow-x: hidden;
+}
+
+.slides { position: relative; }
+
+.relativeWrap {
+	width: 100%; 
+	height: 100%;
+	position: relative;
+}
+
+.slideControls { 
+	position: absolute;
+	z-index: 300;
+	top: 40%;
+
+	&:active { opacity: 0.5; }
+
+	i {
+		color: @white;
+		font-size: 50px;
+		display: block;
+		cursor: pointer;
+	}
+	
+	&--left { left: 15px; }
+
+	&--right { right: 15px; }
+}
+
+.slideshow__caption {
+	width: 100%;
+	text-align: center;
+	.hindMedium;
+	font-size: 16px;
+	border-top: 1px solid @gray;
+	position: absolute;
+	bottom: 0;
+	padding: 10px;
+	background-color: fade(@black, 50%);
+	color: @white;
+}
+
+@media only screen and (max-width: 1023px) {
+	.slide { width: 100vw; }
+}
+
+// Maps Section
+
+.fullContainer--maps { padding: 0; margin-top: 68px; }
+
+// Weather Section
+
+.currentWeather { width: 100%; text-align: center; }
+
+.currentWeather__main {
+	width: 100%;
+	img { display: inline-block; }
+
+	h1 { display: inline-block; .hindBold; font-size: 80px; color: @green; }
+}
+
+.currentWeather__description {
+	.hindSemiBold; 
+	font-size: 35px;
+	margin-bottom: 25px;
+	color: @tan;
+	width: 100%;
+}
+
+.currentWeather__info { width: 85%; margin: 0 auto; display: table; }
+
+.currentWeather__details {
+	.hindNormal;
+	font-size: 25px;
+	color: @gray;
+	margin-bottom: 15px;
+
+	span { float: right;}
+}
+
+.forecast {
+	margin-top: 30px;
+
+	&__content {
+		&--first { margin-top: 40px; }
+
+		&--last { margin-top: 40px; }
+	}
+
+	&__details {
+		text-align: center;
+		.hindNormal;
+		color: @gray;
+		font-size: 22px;
+		vertical-align: middle;
+		padding-bottom: 10px;
+
+		img { margin-bottom: -15px; }
+		
+
+		&--day { text-align: center; .hindSemiBold; color: @gray; font-size: 22px; }
+
+		&--main {
+			font-style: italic;
+			color: @green;
+		}
+	}
+}
+
+
+// Generic Media Queries
+
+//Ipad
+
+@media only screen and (min-width: 600px) {
+	// Generic
+
+	.subHeading {
+		font-size: 30px;
+
+		br { display: none; }
+
+		span { font-size: 24px; }
+	}
+
+	.content--last { margin-bottom: 117px; }
+
+	// Header and Nav
+	.header__topBar {
+		height: auto;
+
+		.header__buttons {
+			position: absolute; 
+			left: 0;
+			height: 83px;
+			width: 83px;
+
+			.header__hamburger {
+				height: 83px;
+				width: 83px;
+				padding: 15px;
+				cursor: pointer;
+			}
+		}
+
+		a {
+			padding-left: 0;
+
+			p { font-size: 25px; }
+
+			span { font-size: 35px; }
+
+			img { display: inline; width: 35px; height: 35px; }
+
+			.tagline { font-size: 14px; text-align: center; }
+		}
+
+
+	}
+
+	.header__dropdown { top: 83px;}
+
+	.header__dropdown {
+
+		&__links {
+			height: 45px;
+
+			a { font-size: 22px; padding: 10px 100px 10px 20px; }
+		}
+	}
+
+	.nav {
+
+		a {
+			i { font-size: 43px !important; margin-bottom: 10px;}
+			
+			span { .hindSemiBold; font-size: 20px; }
+		}
+
+	}
+
+	// index.html
+	
+	.heading--home {
+    	margin-top: 83px;
+	}
+
+	.home__city {
+		font-size: 20px;
+
+	}
+
+	/*.home__unit {
+		height: 175px;
+		
+		h3 { font-size: 32px; padding-top: 25px; }
+
+		a {
+			display: block;
+			.columns(12);
+			height: 100%;
+			color: @white;
+			text-shadow: 0 0 7px @black;
+		}
+
+		.amenities--home img { height: 50px; }
+
+	}*/
+
+	.home__unit {
+		width: 50%;
+		float: left;
+		height: 260px;
+		border-bottom: none;
+
+		&:first-child,
+		&:nth-child(3) { border-right: 2px solid @gray; }
+
+		&:nth-child(3),
+		&:nth-child(4) { border-top: 2px solid @gray; }
+
+		a { position: relative; }
+
+		h3 { width: 100%; position: absolute; bottom: 50px; font-size: 24px;}
+
+		.amenities--home {
+			position: absolute;
+			bottom: 0;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+
+		&--single { float: none; margin: 0 auto; border-right: none !important; width: 100%; }
+	}
+
+	// Interior Pages
+	
+	.content__hero {
+		margin-top: 83px;
+		
+		&--info { height: 215px; }
+
+		&--weather { height: 160px; }
+	}
+
+		// Info
+
+	.basicInfo {
+		width: 100%;
+		text-align: center;
+		margin-bottom: 20px;
+
+		h2 span { padding-left: 20px; }
+	}
+
+	.amenities br { display: none; }
+
+		// Photo Slideshow
+	
+	.heading--photos { margin-top: 83px; }
+
+	.slides { height: auto; }
+
+	.slide { padding-right: 5px; }
+
+	.slideControls--left { left: 30px; }
+
+	.slideControls--right { right: 30px; }
+
+	.slideshow__caption {
+		font-size: 20px;
+		padding: 20px 0 40px 0;
+	}
+
+		// Weather Forecast
+
+	.content--weather {
+		
+		&:nth-of-type(1) { .columns(6); .offset(1); }
+
+		&:nth-of-type(2) { .columns(6); .offset(1); }
+	}
+
+	.subHeading--weather {
+		display: block;
+		width: 85%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	.forecast {
+		margin-top: 0;
+
+		h2 { margin-left: 109px; }
+	}
+
+		// Directions and Trail Maps
+
+	.fullContainer--directions,
+	.fullContainer--maps { margin-top: 83px; }
+
+	.entrances {
+		width: 33.33%;
+		float: left;
+		padding: 20px;
+		border: none;
+
+		&--first { margin-top: 0; }
+
+		img { display: block; width: 100%; }
+
+		h2 {
+			display: block;
+			width: 100%;
+			padding-left: 0;
+			padding-top: 20px;
+		}
+
+	}
+
+	.subHeading--entrances { padding-left: 20px; }
+
+	.subHeading--maps { padding-left: 20px; }
+}
+
+// Home Page Break Point
+
+@media only screen and (min-width: 920px) {
+	.home__unit {
+		
+		h3 { font-size: 32px; bottom: 70px; }
+
+		.amenities--home img { height: 50px; }
+	}
+}
+
+// Computer Screen
+
+@media only screen and (min-width: 1090px) {
+
+	.footerMobile { display: initial; }
+
+	.monitorContainer {
+		position: relative;/*
+		max-width: @containerSize;*/
+		width: 90%;
+		margin: 0 auto;
+	}
+
+	.row--first { margin-top: 90px; }
+
+	.container { background-color: @white; }
+
+	.heading--photos { padding-top: 10px; }
+
+	// Header and Main Nav
+
+	.header__topBar .header__buttons { display: none; }
+
+	.header__dropdown { width: 100%; display: block; }
+
+	.header__dropdown__links {
+		float: left;
+	    width: 14.28%;
+	    text-align: center;
+	    height: auto;
+
+			a { 
+				font-size: 22px; 
+				padding: 10px 20px; 
+		
+				&:hover { color: @tan; }
+		}
+	}
+
+	// Home Page Styles
+
+	.container--home {
+		margin-top: 157px;
+		padding: 0 20px;
+		
+		.row:first-child { padding-top: 0 !important; }
+	}
+
+	.heading--home { display: none; }
+
+	.home__unit {
+		margin: 2.5%;
+		width: 45%;
+		border-top: none !important;
+		border-right: none !important;
+
+		&--single { width: 95%; margin: 2.5%; }
+	}
+	// Interior Pages
+	
+		// Interior Nav
+
+	.nav {
+		padding: 0;
+		position: fixed;
+		top: 30%;
+		left: 0;
+		width: auto;
+		height: 425px;
+
+		li {
+			float: none;
+			padding: 10px 5px;
+			border-bottom: 1px solid @white;
+			
+			&:last-child { border-bottom: none; }
+		}
+
+		&--main li { width: auto; }
+
+		&--noMap {
+			height: 339px;
+
+			li { width: auto; }
+		}
+
+		a {
+			i { font-size: 35px !important; }
+
+			span { font-size: 16px; }
+		}
+
+		&:after {
+			content: "";
+			display: table;
+			clear: both; 
+		}
+	}
+
+		// Info Pages
+
+	.content__hero { height: 375px; margin-top: 0; }
+
+		// Photo Pages
+	
+	.heading--photos { margin-top: 130px; }
+
+	.slideshow__caption { padding: 20px; }
+
+	.slidesWrap { height: 70vh; max-height: 693px; overflow: hidden; margin-top: 5px; }
+	
+	// Directions Pages
+
+	.fullContainer--directions,
+	.fullContainer--maps { margin-top: 130px; }
+}
