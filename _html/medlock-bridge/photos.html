@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	@@include('../../_includes/topInc.html', {
+    "dots_": "../"
+})
+</head>
+<body>
+@@include('../../_includes/header.html', {
+    "dots_": "../"
+})
+@@include('../../_includes/nav.html', {
+    "dots_": "../"
+})
+
+<h1 class="heading heading--photos">Medlock Bridge</h1>
+
+<div class="monitorContainer">
+	<div class="row">
+		<div class="slidesWrap">
+			<div class="relativeWrap">
+				<div class="slideControls slideControls--left" id=prev><i class="fa fa-chevron-left"></i></div>
+	        	<div class="slideControls slideControls--right" id=next><i class="fa fa-chevron-right"></i></div>
+				<div class="slides slideshow"
+				data-cycle-fx='carousel'
+				data-cycle-swipe=true
+    			data-cycle-swipe-fx=scrollHorz
+				data-cycle-next="#next"
+				data-cycle-prev="#prev"
+				data-cycle-timeout=0>
+
+					<img src="../_images/palisades-east/image1.jpg" class="slide" data-cycle-desc="View from the overlook between EP 10 and EP 14 (see unit map)">
+					<img src="../_images/palisades-east/image2.jpg" class="slide" data-cycle-desc="Spring flowers on the East Palisades Trail">
+					<img src="../_images/palisades-east/image3.jpg" class="slide" data-cycle-desc="Spring flowers on the East Palisades Trail">
+				</div>
+				<div class="slideshow__caption"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="footerMobile">@@include('../../_includes/footer.html', {
+    "dots_": "../"
+})</div>
+@@include('../../_includes/botInc.html', {
+    "dots_": "../"
+})
+<script src="../_js/jquery.cycle2.min.js"></script>
+<script src="../_js/jquery.cycle2.carousel.min.js"></script>
+<script src="../_js/jquery.cycle2.center.min.js"></script>
+<script src="../_js/jquery.cycle2.swipe.min.js"></script>
+<script>
+	$(document).ready( function() {
+		oneMap('medlock-bridge');
+		oneEntrance('Medlock Bridge');
+
+		centerSlideshow();
+
+		$('.slideshow').cycle();
+
+		captions();
+	});
+</script>
+</body>
+</html>
