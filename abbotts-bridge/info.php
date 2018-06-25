@@ -2,11 +2,11 @@
 <?php require("../_assets/common.php"); ?>
 <html lang="en">
 <head>
-	<? $cri->includeContent(1,'topInc'); ?>
+	<?php $cri->includeContent(1,'topInc'); ?>
 </head>
 <body>
-<? $cri->includeContent(1,'header'); ?>
-<? $cri->includeContent(1,'nav'); ?>
+<?php $cri->includeContent(1,'header'); ?>
+<?php $cri->includeContent(1,'nav'); ?>
 <div class="fullContainer fullContainer--hero">
 	<div class="content content__hero content__hero--info">
 		<img src="http://placehold.it/500x200?text=Image+to+come" alt="Image to Come">
@@ -31,8 +31,8 @@
 	</div>
 </div>
 
-<div class="footerMobile"><? $cri->includeContent(1,'footer'); ?></div>
-<? $cri->includeContent(1,'botInc'); ?>
+<div class="footerMobile"><?php $cri->includeContent(1,'footer'); ?></div>
+<?php $cri->includeContent(1,'botInc'); ?>
 
 <script>
 	$(document).ready( function() {

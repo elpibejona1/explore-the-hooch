@@ -2,10 +2,10 @@
 <?php require("_assets/common.php"); ?>
 <html lang="en">
 <head>
-	<? $cri->includeContent(0,'topInc'); ?>
+	<?php $cri->includeContent(0,'topInc'); ?>
 </head>
 <body>
-<? $cri->includeContent(0,'header'); ?>
+<?php $cri->includeContent(0,'header'); ?>
 <div class="container container--home">
 	<h1 class="heading heading--home">Choose a park unit to begin:</h1>
 	<div class="row">
@@ -235,8 +235,8 @@
 		</ul>
 	</div>
 </div>
-<? $cri->includeContent(0,'footer'); ?>
-<? $cri->includeContent(0,'botInc'); ?>
+<?php $cri->includeContent(0,'footer'); ?>
+<?php $cri->includeContent(0,'botInc'); ?>
 <script>
 	$(document).ready( function() {
 		$('.header__dropdown__links:first-child').addClass('active');

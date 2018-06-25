@@ -2,11 +2,11 @@
 <?php require("../_assets/common.php"); ?>
 <html lang="en">
 <head>
-	<? $cri->includeContent(1,'topInc'); ?>
+	<?php $cri->includeContent(1,'topInc'); ?>
 </head>
 <body>
-<? $cri->includeContent(1,'header'); ?>
-<? $cri->includeContent(1,'nav'); ?>
+<?php $cri->includeContent(1,'header'); ?>
+<?php $cri->includeContent(1,'nav'); ?>
 <div class="fullContainer fullContainer--maps">
 	<h1 class="heading">Johnson Ferry</h1>
 </div>
@@ -31,10 +31,10 @@
 
 
 
-<div class="footerMobile"><? $cri->includeContent(1,'footer'); ?></div>
+<div class="footerMobile"><?php $cri->includeContent(1,'footer'); ?></div>
 
 
-<? $cri->includeContent(1,'botInc'); ?>
+<?php $cri->includeContent(1,'botInc'); ?>
 
 
 <script>
